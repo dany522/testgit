@@ -98,6 +98,7 @@ def edit(id):
     if current_user !=post.author and \
         not current_user.can(Permission.ADMIN):
         abort(403)
+
     form = PostForm()
     if form.validate_on_submit():
         post.body = form.body.data
@@ -182,7 +183,6 @@ def post(id):
 
 @main.route('/moderate')
 @login_required
-
 def moderate():
     page = request.args.get('page',1,type=int)
     pagination = Comment.query.order_by(Comment.timestamp.desc()).paginate(

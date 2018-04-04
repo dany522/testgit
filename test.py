@@ -7,7 +7,7 @@ from wtforms import StringField,SubmitField
 from wtforms.validators import Required
 from flask_sqlalchemy import SQLAlchemy
 from flask_script import Manager,Shell
-from flask_mail import Message
+from flask_mail import Message,Mail
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hard to guess string'
 bootstrap = Bootstrap(app)
@@ -15,17 +15,23 @@ moment = Moment(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:jolin1500@localhost/test?charset=utf8mb4'
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+
+
 app.config['MAIL_SERVER'] = 'stmp.163.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USERNAME'] = '18381673407@163.com'
 app.config['MAIL_PASSWORD'] = 'l123456'
+app.config['FLASKY_MAIL_SUBJECT_PREFIX'] = 'FLASKY'
+app.config['FLASKY_MAIL_SENDER'] = '18381673407@163.com'
+
+
+
 manager = Manager(app)
 db = SQLAlchemy(app)
+mail = Mail(app)
 
-def make_shell_context():
-    return dict(app = app,db=db,User=User,Role=Role)
-manager.add_command('shell',Shell(make_context=make_shell_context))
+
 class Role(db.Model):
     __tablename__ = 'role'
     id = db.Column(db.Integer,primary_key=True)
@@ -78,8 +84,11 @@ def page_not_found(e):
 def internal_server_error(e):
     return render_template('500.html'),500
 
+def make_shell_context():
+    return dict(app=app,db=db,User=User,Role=Role,mail=mail)
+manager.add_command('shell',Shell(make_context=make_shell_context))
+
 
 if __name__ == '__main__':
-
-    app.run(debug=True)
+    manager.run()
 
