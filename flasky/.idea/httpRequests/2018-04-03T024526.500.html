@@ -1,0 +1,293 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>AttributeError: '_AppCtxGlobals' object has no attribute 'current_user' // Werkzeug Debugger</title>
+    <link rel="stylesheet" href="?__debugger__=yes&amp;cmd=resource&amp;f=style.css"
+        type="text/css">
+    <!-- We need to make sure this has a favicon so that the debugger does
+         not by accident trigger a request to /favicon.ico which might
+         change the application state. -->
+    <link rel="shortcut icon"
+        href="?__debugger__=yes&amp;cmd=resource&amp;f=console.png">
+    <script src="?__debugger__=yes&amp;cmd=resource&amp;f=jquery.js"></script>
+    <script src="?__debugger__=yes&amp;cmd=resource&amp;f=debugger.js"></script>
+    <script type="text/javascript">
+      var TRACEBACK = 95345808,
+          CONSOLE_MODE = false,
+          EVALEX = true,
+          EVALEX_TRUSTED = false,
+          SECRET = "hOyvROWgEovJxlkDIz9y";
+    </script>
+  </head>
+  <body>
+    <div class="debugger">
+<h1>AttributeError</h1>
+<div class="detail">
+  <p class="errormsg">AttributeError: '_AppCtxGlobals' object has no attribute 'current_user'</p>
+</div>
+<h2 class="traceback">Traceback <em>(most recent call last)</em></h2>
+<div class="traceback">
+  
+  <ul><li><div class="frame" id="frame-95345872">
+  <h4>File <cite class="filename">"C:\Python27\lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">2000</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">                </span>error = None</pre>
+<pre class="line before"><span class="ws">            </span>ctx.auto_pop(error)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>def __call__(self, environ, start_response):</pre>
+<pre class="line before"><span class="ws">        </span>&quot;&quot;&quot;Shortcut for :attr:`wsgi_app`.&quot;&quot;&quot;</pre>
+<pre class="line current"><span class="ws">        </span>return self.wsgi_app(environ, start_response)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def __repr__(self):</pre>
+<pre class="line after"><span class="ws">        </span>return '&lt;%s %r&gt;' % (</pre>
+<pre class="line after"><span class="ws">            </span>self.__class__.__name__,</pre>
+<pre class="line after"><span class="ws">            </span>self.name,</pre></div>
+</div>
+
+<li><div class="frame" id="frame-95345968">
+  <h4>File <cite class="filename">"C:\Python27\lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1991</em>,
+      in <code class="function">wsgi_app</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line before"><span class="ws">                </span>response = self.full_dispatch_request()</pre>
+<pre class="line before"><span class="ws">            </span>except Exception as e:</pre>
+<pre class="line before"><span class="ws">                </span>error = e</pre>
+<pre class="line current"><span class="ws">                </span>response = self.make_response(self.handle_exception(e))</pre>
+<pre class="line after"><span class="ws">            </span>return response(environ, start_response)</pre>
+<pre class="line after"><span class="ws">        </span>finally:</pre>
+<pre class="line after"><span class="ws">            </span>if self.should_ignore_error(error):</pre>
+<pre class="line after"><span class="ws">                </span>error = None</pre>
+<pre class="line after"><span class="ws">            </span>ctx.auto_pop(error)</pre></div>
+</div>
+
+<li><div class="frame" id="frame-95345904">
+  <h4>File <cite class="filename">"C:\Python27\lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1567</em>,
+      in <code class="function">handle_exception</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">            </span># if we want to repropagate the exception, we can attempt to</pre>
+<pre class="line before"><span class="ws">            </span># raise it with the whole traceback in case we can do that</pre>
+<pre class="line before"><span class="ws">            </span># (the function was actually called from the except part)</pre>
+<pre class="line before"><span class="ws">            </span># otherwise, we just raise the error again</pre>
+<pre class="line before"><span class="ws">            </span>if exc_value is e:</pre>
+<pre class="line current"><span class="ws">                </span>reraise(exc_type, exc_value, tb)</pre>
+<pre class="line after"><span class="ws">            </span>else:</pre>
+<pre class="line after"><span class="ws">                </span>raise e</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">        </span>self.log_exception((exc_type, exc_value, tb))</pre>
+<pre class="line after"><span class="ws">        </span>if handler is None:</pre></div>
+</div>
+
+<li><div class="frame" id="frame-95346000">
+  <h4>File <cite class="filename">"C:\Python27\lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1988</em>,
+      in <code class="function">wsgi_app</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">        </span>ctx = self.request_context(environ)</pre>
+<pre class="line before"><span class="ws">        </span>ctx.push()</pre>
+<pre class="line before"><span class="ws">        </span>error = None</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line current"><span class="ws">                </span>response = self.full_dispatch_request()</pre>
+<pre class="line after"><span class="ws">            </span>except Exception as e:</pre>
+<pre class="line after"><span class="ws">                </span>error = e</pre>
+<pre class="line after"><span class="ws">                </span>response = self.make_response(self.handle_exception(e))</pre>
+<pre class="line after"><span class="ws">            </span>return response(environ, start_response)</pre>
+<pre class="line after"><span class="ws">        </span>finally:</pre></div>
+</div>
+
+<li><div class="frame" id="frame-95346032">
+  <h4>File <cite class="filename">"C:\Python27\lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1641</em>,
+      in <code class="function">full_dispatch_request</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">            </span>request_started.send(self)</pre>
+<pre class="line before"><span class="ws">            </span>rv = self.preprocess_request()</pre>
+<pre class="line before"><span class="ws">            </span>if rv is None:</pre>
+<pre class="line before"><span class="ws">                </span>rv = self.dispatch_request()</pre>
+<pre class="line before"><span class="ws">        </span>except Exception as e:</pre>
+<pre class="line current"><span class="ws">            </span>rv = self.handle_user_exception(e)</pre>
+<pre class="line after"><span class="ws">        </span>response = self.make_response(rv)</pre>
+<pre class="line after"><span class="ws">        </span>response = self.process_response(response)</pre>
+<pre class="line after"><span class="ws">        </span>request_finished.send(self, response=response)</pre>
+<pre class="line after"><span class="ws">        </span>return response</pre>
+<pre class="line after"><span class="ws"></span> </pre></div>
+</div>
+
+<li><div class="frame" id="frame-95346064">
+  <h4>File <cite class="filename">"C:\Python27\lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1544</em>,
+      in <code class="function">handle_user_exception</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">            </span>return self.handle_http_exception(e)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>handler = self._find_error_handler(e)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>if handler is None:</pre>
+<pre class="line current"><span class="ws">            </span>reraise(exc_type, exc_value, tb)</pre>
+<pre class="line after"><span class="ws">        </span>return handler(e)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def handle_exception(self, e):</pre>
+<pre class="line after"><span class="ws">        </span>&quot;&quot;&quot;Default exception handling that kicks in when an exception</pre>
+<pre class="line after"><span class="ws">        </span>occurs that is not caught.  In debug mode the exception will</pre></div>
+</div>
+
+<li><div class="frame" id="frame-95346096">
+  <h4>File <cite class="filename">"C:\Python27\lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1637</em>,
+      in <code class="function">full_dispatch_request</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">        </span>.. versionadded:: 0.7</pre>
+<pre class="line before"><span class="ws">        </span>&quot;&quot;&quot;</pre>
+<pre class="line before"><span class="ws">        </span>self.try_trigger_before_first_request_functions()</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>request_started.send(self)</pre>
+<pre class="line current"><span class="ws">            </span>rv = self.preprocess_request()</pre>
+<pre class="line after"><span class="ws">            </span>if rv is None:</pre>
+<pre class="line after"><span class="ws">                </span>rv = self.dispatch_request()</pre>
+<pre class="line after"><span class="ws">        </span>except Exception as e:</pre>
+<pre class="line after"><span class="ws">            </span>rv = self.handle_user_exception(e)</pre>
+<pre class="line after"><span class="ws">        </span>response = self.make_response(rv)</pre></div>
+</div>
+
+<li><div class="frame" id="frame-95346128">
+  <h4>File <cite class="filename">"C:\Python27\lib\site-packages\flask\app.py"</cite>,
+      line <em class="line">1837</em>,
+      in <code class="function">preprocess_request</code></h4>
+  <div class="source"><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>funcs = self.before_request_funcs.get(None, ())</pre>
+<pre class="line before"><span class="ws">        </span>if bp is not None and bp in self.before_request_funcs:</pre>
+<pre class="line before"><span class="ws">            </span>funcs = chain(funcs, self.before_request_funcs[bp])</pre>
+<pre class="line before"><span class="ws">        </span>for func in funcs:</pre>
+<pre class="line current"><span class="ws">            </span>rv = func()</pre>
+<pre class="line after"><span class="ws">            </span>if rv is not None:</pre>
+<pre class="line after"><span class="ws">                </span>return rv</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def process_response(self, response):</pre>
+<pre class="line after"><span class="ws">        </span>&quot;&quot;&quot;Can be overridden in order to modify the response object</pre></div>
+</div>
+
+<li><div class="frame" id="frame-95346160">
+  <h4>File <cite class="filename">"D:\project\flasky\app\api_1_0\authentication.py"</cite>,
+      line <em class="line">35</em>,
+      in <code class="function">before_request</code></h4>
+  <div class="source"><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws"></span>@api.before_request</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws"></span>def before_request():</pre>
+<pre class="line current"><span class="ws">    </span>if not g.current_user.is_anonymous and \</pre>
+<pre class="line after"><span class="ws">            </span>not g.current_user.confirmed:</pre>
+<pre class="line after"><span class="ws">        </span>return forbidden('Unconfirmed account')</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws"></span> </pre></div>
+</div>
+
+<li><div class="frame" id="frame-95346192">
+  <h4>File <cite class="filename">"C:\Python27\lib\site-packages\werkzeug\local.py"</cite>,
+      line <em class="line">343</em>,
+      in <code class="function">__getattr__</code></h4>
+  <div class="source"><pre class="line before"><span class="ws">            </span>return []</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>def __getattr__(self, name):</pre>
+<pre class="line before"><span class="ws">        </span>if name == '__members__':</pre>
+<pre class="line before"><span class="ws">            </span>return dir(self._get_current_object())</pre>
+<pre class="line current"><span class="ws">        </span>return getattr(self._get_current_object(), name)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def __setitem__(self, key, value):</pre>
+<pre class="line after"><span class="ws">        </span>self._get_current_object()[key] = value</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def __delitem__(self, key):</pre></div>
+</div>
+</ul>
+  <blockquote>AttributeError: '_AppCtxGlobals' object has no attribute 'current_user'</blockquote>
+</div>
+
+<div class="plain">
+  <form action="/?__debugger__=yes&amp;cmd=paste" method="post">
+    <p>
+      <input type="hidden" name="language" value="pytb">
+      This is the Copy/Paste friendly version of the traceback.  <span
+      class="pastemessage">You can also paste this traceback into
+      a <a href="https://gist.github.com/">gist</a>:
+      <input type="submit" value="create paste"></span>
+    </p>
+    <textarea cols="50" rows="10" name="code" readonly>Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\flask\app.py", line 2000, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "C:\Python27\lib\site-packages\flask\app.py", line 1991, in wsgi_app
+    response = self.make_response(self.handle_exception(e))
+  File "C:\Python27\lib\site-packages\flask\app.py", line 1567, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Python27\lib\site-packages\flask\app.py", line 1988, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Python27\lib\site-packages\flask\app.py", line 1641, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Python27\lib\site-packages\flask\app.py", line 1544, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Python27\lib\site-packages\flask\app.py", line 1637, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "C:\Python27\lib\site-packages\flask\app.py", line 1837, in preprocess_request
+    rv = func()
+  File "D:\project\flasky\app\api_1_0\authentication.py", line 35, in before_request
+    if not g.current_user.is_anonymous and \
+  File "C:\Python27\lib\site-packages\werkzeug\local.py", line 343, in __getattr__
+    return getattr(self._get_current_object(), name)
+AttributeError: '_AppCtxGlobals' object has no attribute 'current_user'</textarea>
+  </form>
+</div>
+<div class="explanation">
+  The debugger caught an exception in your WSGI application.  You can now
+  look at the traceback which led to the error.  <span class="nojavascript">
+  If you enable JavaScript you can also use additional features such as code
+  execution (if the evalex feature is enabled), automatic pasting of the
+  exceptions and much more.</span>
+</div>
+      <div class="footer">
+        Brought to you by <strong class="arthur">DON'T PANIC</strong>, your
+        friendly Werkzeug powered traceback interpreter.
+      </div>
+    </div>
+
+    <div class="pin-prompt">
+      <div class="inner">
+        <h3>Console Locked</h3>
+        <p>
+          The console is locked and needs to be unlocked by entering the PIN.
+          You can find the PIN printed out on the standard output of your
+          shell that runs the server.
+        <form>
+          <p>PIN:
+            <input type=text name=pin size=14>
+            <input type=submit name=btn value="Confirm Pin">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+
+<!--
+
+Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\flask\app.py", line 2000, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "C:\Python27\lib\site-packages\flask\app.py", line 1991, in wsgi_app
+    response = self.make_response(self.handle_exception(e))
+  File "C:\Python27\lib\site-packages\flask\app.py", line 1567, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Python27\lib\site-packages\flask\app.py", line 1988, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Python27\lib\site-packages\flask\app.py", line 1641, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Python27\lib\site-packages\flask\app.py", line 1544, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Python27\lib\site-packages\flask\app.py", line 1637, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "C:\Python27\lib\site-packages\flask\app.py", line 1837, in preprocess_request
+    rv = func()
+  File "D:\project\flasky\app\api_1_0\authentication.py", line 35, in before_request
+    if not g.current_user.is_anonymous and \
+  File "C:\Python27\lib\site-packages\werkzeug\local.py", line 343, in __getattr__
+    return getattr(self._get_current_object(), name)
+AttributeError: '_AppCtxGlobals' object has no attribute 'current_user'
+
+-->
