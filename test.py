@@ -54,6 +54,13 @@ class NameForm(Form):
     name = StringField('What is your name?',validators=[Required()])
     submit = SubmitField('Submit')
 
+def send_email(to,subject,template,**kwargs):
+    msg = Message(app.config['FLASKY_MAIL_SUBJECT_PREFIX'] + subject,
+                  sender=app.config['FLASKY_MAIL_SENDER'], recipients=[to])
+    msg.body = render_template(template + '.txt', **kwargs)
+    msg.html = render_template(template + '.html', **kwargs)
+    mail.send(msg)
+
 @app.route('/',methods=['GET','POST'])
 def index():
     form = NameForm()
@@ -64,6 +71,7 @@ def index():
             user = User(name=form.name.data,role_id=3)
             db.session.add(user)
             session['Known'] = False
+            send_email('2275657036@qq.com','new user','mail/new_user',user=user)
         else:
             session['Known'] = True
 
@@ -90,5 +98,5 @@ manager.add_command('shell',Shell(make_context=make_shell_context))
 
 
 if __name__ == '__main__':
-    manager.run()
+    app.run()
 

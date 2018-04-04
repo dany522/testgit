@@ -1,0 +1,8 @@
+Dear {{ user.name }},
+Welcome to Flasky!
+To confirm your accouont please click on the following link:
+
+
+Sincerely,
+The Flasky Team
+Note: replies to this email address are not monitored
